@@ -5,6 +5,9 @@
  */
 package ittapiros;
 
+import java.util.Random;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Imi
@@ -14,8 +17,13 @@ public class felulet extends javax.swing.JFrame {
     /**
      * Creates new form felulet
      */
-    public felulet() {
+    private static int randszam;
+    private static boolean uj;
+    public felulet() 
+    {
         initComponents();
+        
+        
     }
 
     /**
@@ -27,20 +35,72 @@ public class felulet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcmbFile = new javax.swing.JComboBox<>();
+        jcmbJatek = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnPohar1 = new javax.swing.JButton();
+        btnPohar2 = new javax.swing.JButton();
+        btnPohar3 = new javax.swing.JButton();
+        jchbTippenkentUjhely = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jlbTalalatVisszajelzo = new javax.swing.JLabel();
+        btnIndit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "uj jatek", "mentes", "betoltes" }));
+        jcmbFile.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ujjatek", "mentes", "betoltes" }));
+        jcmbFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbFileActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 pohar", "4 pohar" }));
+        jcmbJatek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3pohar", "4pohar" }));
 
-        jLabel1.setText("Poharak");
+        jLabel1.setText("Jatek");
 
-        jLabel2.setText("Jatek");
+        jLabel2.setText("Fajl");
+
+        btnPohar1.setText("Pohar1");
+        btnPohar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPohar1ActionPerformed(evt);
+            }
+        });
+
+        btnPohar2.setText("Pohar2");
+        btnPohar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPohar2ActionPerformed(evt);
+            }
+        });
+
+        btnPohar3.setText("Pohar3");
+        btnPohar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPohar3ActionPerformed(evt);
+            }
+        });
+
+        jchbTippenkentUjhely.setSelected(true);
+        jchbTippenkentUjhely.setText("TippenkentUjhely");
+        jchbTippenkentUjhely.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jchbTippenkentUjhelyActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Találat:");
+
+        jlbTalalatVisszajelzo.setText("Nem");
+
+        btnIndit.setText("indit");
+        btnIndit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,29 +108,142 @@ public class felulet extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(37, 37, 37)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPohar1)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnPohar2)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnPohar3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(37, 37, 37)
+                                .addComponent(jcmbFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcmbJatek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlbTalalatVisszajelzo)
+                                .addGap(192, 192, 192)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnIndit)
+                            .addComponent(jchbTippenkentUjhely))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcmbFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcmbJatek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(257, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jchbTippenkentUjhely))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlbTalalatVisszajelzo)
+                    .addComponent(btnIndit))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPohar1)
+                    .addComponent(btnPohar2)
+                    .addComponent(btnPohar3))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInditActionPerformed
+
+                jatekindit();
+                
+
+
+
+
+    }//GEN-LAST:event_btnInditActionPerformed
+
+    private void btnPohar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPohar1ActionPerformed
+        // TODO add your handling code here:
+        
+        int szam=1;
+        if (szam==randszam)
+        {
+            jlbTalalatVisszajelzo.setText("IGEN");
+            
+        }
+        if (uj)
+        {
+            jatekindit();
+            
+        }
+        
+        
+    }//GEN-LAST:event_btnPohar1ActionPerformed
+
+    private void btnPohar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPohar2ActionPerformed
+        // TODO add your handling code here:
+        int szam=2;
+        if (szam==randszam)
+        {
+            jlbTalalatVisszajelzo.setText("IGEN");
+            
+        }
+        if (uj)
+        {
+            jatekindit();
+            
+        }
+        
+    }//GEN-LAST:event_btnPohar2ActionPerformed
+
+    private void btnPohar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPohar3ActionPerformed
+        // TODO add your handling code here:
+        int szam=3;
+        if (szam==randszam)
+        {
+            jlbTalalatVisszajelzo.setText("IGEN");
+            
+        }
+        if (uj)
+        {
+            jatekindit();
+            
+        }
+        
+    }//GEN-LAST:event_btnPohar3ActionPerformed
+
+    private void jcmbFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbFileActionPerformed
+        // TODO add your handling code here:
+        if (jcmbJatek.getSelectedItem()=="ujjatek")
+        {
+            jatekindit();
+            
+        }
+    }//GEN-LAST:event_jcmbFileActionPerformed
+
+    private void jchbTippenkentUjhelyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchbTippenkentUjhelyActionPerformed
+        
+        if (jchbTippenkentUjhely.isSelected())
+        {
+            uj=true;
+            
+        }
+        else
+        {
+            uj=false;
+        }
+    }//GEN-LAST:event_jchbTippenkentUjhelyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,9 +281,37 @@ public class felulet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnIndit;
+    private javax.swing.JButton btnPohar1;
+    private javax.swing.JButton btnPohar2;
+    private javax.swing.JButton btnPohar3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JCheckBox jchbTippenkentUjhely;
+    private javax.swing.JComboBox<String> jcmbFile;
+    private javax.swing.JComboBox<String> jcmbJatek;
+    private javax.swing.JLabel jlbTalalatVisszajelzo;
     // End of variables declaration//GEN-END:variables
+
+    private void jatekindit()
+    {
+        
+        if (jcmbJatek.getSelectedItem()=="3pohar")
+        {
+            Random rand = new Random();
+            randszam = rand.nextInt(4);
+            if (randszam==0)
+            {
+                randszam+=1;
+                
+            }
+            System.out.println(randszam);
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane,"a funkcio nem lerheto");
+        }
+    }
 }
