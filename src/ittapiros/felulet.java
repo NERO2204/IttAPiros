@@ -5,8 +5,20 @@
  */
 package ittapiros;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -19,9 +31,12 @@ public class felulet extends javax.swing.JFrame {
      */
     private static int randszam;
     private static boolean uj;
-    public felulet() 
+    private static boolean nyert;
+    public felulet() throws IOException 
     {
         initComponents();
+        vizsgal();
+      
         
         
     }
@@ -41,6 +56,8 @@ public class felulet extends javax.swing.JFrame {
         jchbTippenkentUjhely = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jlbTalalatVisszajelzo = new javax.swing.JLabel();
+        btnMent = new javax.swing.JButton();
+        btnBetölt = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miUjatek = new javax.swing.JMenuItem();
@@ -85,6 +102,20 @@ public class felulet extends javax.swing.JFrame {
 
         jlbTalalatVisszajelzo.setText("Nem");
 
+        btnMent.setText("Mentés");
+        btnMent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMentActionPerformed(evt);
+            }
+        });
+
+        btnBetölt.setText("Betöltés");
+        btnBetölt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBetöltActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Fajl");
 
         miUjatek.setText("Uj jatek");
@@ -127,19 +158,24 @@ public class felulet extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPohar1)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnPohar2)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnPohar3)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlbTalalatVisszajelzo)
                         .addGap(192, 192, 192)
-                        .addComponent(jchbTippenkentUjhely)))
+                        .addComponent(jchbTippenkentUjhely))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnPohar1)
+                                .addGap(40, 40, 40)
+                                .addComponent(btnPohar2))
+                            .addComponent(btnMent))
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPohar3)
+                            .addComponent(btnBetölt))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -156,7 +192,11 @@ public class felulet extends javax.swing.JFrame {
                     .addComponent(btnPohar1)
                     .addComponent(btnPohar2)
                     .addComponent(btnPohar3))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMent)
+                    .addComponent(btnBetölt))
+                .addGap(49, 49, 49))
         );
 
         pack();
@@ -169,6 +209,7 @@ public class felulet extends javax.swing.JFrame {
         if (szam==randszam)
         {
             jlbTalalatVisszajelzo.setText("IGEN");
+            nyert=true;
             
         }
          if (jchbTippenkentUjhely.isSelected())
@@ -186,7 +227,7 @@ public class felulet extends javax.swing.JFrame {
         if (szam==randszam)
         {
             jlbTalalatVisszajelzo.setText("IGEN");
-            
+            nyert=true;
         }
         if (jchbTippenkentUjhely.isSelected())
         {
@@ -203,6 +244,7 @@ public class felulet extends javax.swing.JFrame {
         if (szam==randszam)
         {
             jlbTalalatVisszajelzo.setText("IGEN");
+            nyert=true;
             
         }
         if (jchbTippenkentUjhely.isSelected())
@@ -231,6 +273,63 @@ public class felulet extends javax.swing.JFrame {
         // TODO add your handling code here:
          JOptionPane.showMessageDialog(this,"a funkcio nem lerheto");
     }//GEN-LAST:event_mi4PoharActionPerformed
+
+    private void btnMentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMentActionPerformed
+       
+        int golyoHelye=randszam;
+        boolean nyertbool=nyert;
+           try {
+      FileWriter fajlIro = new FileWriter("config.txt");
+      fajlIro.write(golyoHelye+","+nyertbool);
+      fajlIro.close();
+      System.out.println("kiirva");
+      
+    } catch (IOException e)
+    {
+      System.out.println("Hiba.");
+      e.printStackTrace();
+    }
+  
+
+           
+        
+        
+   
+    }//GEN-LAST:event_btnMentActionPerformed
+
+    private void btnBetöltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBetöltActionPerformed
+       
+        
+        try 
+        {
+            Path vonal=Paths.get("config.txt");
+            List<String> sorlista=Files.readAllLines(vonal);
+            Path vonal2=Paths.get("Mentes.txt");
+            
+            for (String string : sorlista)
+            {
+               String[] tomb=string.split(",");
+               randszam=Integer.parseInt(tomb[0]);
+               if (Boolean.parseBoolean(tomb[1])==true)
+               {
+                   nyert=true;
+                    
+               }
+                
+                
+            }
+        } 
+        catch (IOException ex) 
+        {
+           
+        }
+            
+           
+            
+        
+        
+        
+    }//GEN-LAST:event_btnBetöltActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,12 +361,18 @@ public class felulet extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new felulet().setVisible(true);
+                try {
+                    new felulet().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(felulet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBetölt;
+    private javax.swing.JButton btnMent;
     private javax.swing.JButton btnPohar1;
     private javax.swing.JButton btnPohar2;
     private javax.swing.JButton btnPohar3;
@@ -303,4 +408,26 @@ public class felulet extends javax.swing.JFrame {
            
         
     }
+
+    private void vizsgal() throws IOException
+    {
+        try 
+        {
+            Path vonal=Paths.get("tipp.deb");
+            List<String> sorlista=Files.readAllLines(vonal);
+            
+            this.setTitle(""+randszam);
+   
+            
+          
+        } 
+        catch (FileNotFoundException e) 
+        {
+            System.out.println("nincs meg a file");
+           
+        }
+            
+    }
+
+  
 }
